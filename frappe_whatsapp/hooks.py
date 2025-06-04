@@ -65,13 +65,13 @@ app_include_js = "/assets/frappe_whatsapp/js/frappe_whatsapp.js"
 # ------------
 
 # before_install = "frappe_whatsapp.install.before_install"
-# after_install = "frappe_whatsapp.install.after_install"
+after_install = "frappe_whatsapp.install.after_install"
 
 # Uninstallation
 # ------------
 
 # before_uninstall = "frappe_whatsapp.uninstall.before_uninstall"
-# after_uninstall = "frappe_whatsapp.uninstall.after_uninstall"
+after_uninstall = "frappe_whatsapp.uninstall.after_uninstall"
 
 # Desk Notifications
 # ------------------
@@ -111,19 +111,22 @@ app_include_js = "/assets/frappe_whatsapp/js/frappe_whatsapp.js"
 #   }
 # }
 
+
+# WhatsApp Notification
+# ---------------
+whatsapp_notification_validate = [
+    "frappe_whatsapp.overrides.notification.whatsapp_validate"
+]
+whatsapp_notification_send = ["frappe_whatsapp.overrides.notification.whatsapp_send"]
+
+
 # Scheduled Tasks
 # ---------------
 
 scheduler_events = {
-    "all": [
-        "frappe_whatsapp.utils.trigger_whatsapp_notifications_all"
-    ],
-    "hourly": [
-        "frappe_whatsapp.utils.trigger_whatsapp_notifications_hourly"
-    ],
-    "hourly_long": [
-        "frappe_whatsapp.utils.trigger_whatsapp_notifications_hourly_long"
-    ],
+    "all": ["frappe_whatsapp.utils.trigger_whatsapp_notifications_all"],
+    "hourly": ["frappe_whatsapp.utils.trigger_whatsapp_notifications_hourly"],
+    "hourly_long": ["frappe_whatsapp.utils.trigger_whatsapp_notifications_hourly_long"],
     "daily": [
         "frappe_whatsapp.utils.trigger_whatsapp_notifications_daily",
         "frappe_whatsapp.frappe_whatsapp.doctype.whatsapp_notification.whatsapp_notification.trigger_notifications",
@@ -215,6 +218,6 @@ doc_events = {
         "on_trash": "frappe_whatsapp.utils.run_server_script_for_doc_event",
         "after_delete": "frappe_whatsapp.utils.run_server_script_for_doc_event",
         "before_update_after_submit": "frappe_whatsapp.utils.run_server_script_for_doc_event",
-        "on_update_after_submit": "frappe_whatsapp.utils.run_server_script_for_doc_event"
+        "on_update_after_submit": "frappe_whatsapp.utils.run_server_script_for_doc_event",
     }
 }
